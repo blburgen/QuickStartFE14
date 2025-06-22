@@ -1,0 +1,64 @@
+import { useState, type ChangeEvent, type MouseEvent } from "react"
+
+type Props = {
+    addAppointment: (time:string, desc:string) => void,
+}
+
+export default function Sidebar({addAppointment}:Props) {
+    const [isExpanded, setIsExpanded] = useState(true);
+
+    const [formValues, setFormValues] = useState({
+        time: "2025-06-01",
+        desc: "",
+    })
+
+    const handleButtonClick = () => {
+        setIsExpanded(!isExpanded)
+    }
+
+    const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        addAppointment(formValues.time,formValues.desc)
+        setFormValues({
+            time: "2025-06-01",
+            desc: "",
+        })
+    }
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
+        setFormValues({
+            ...formValues,
+            [event.target.name]: event.target.value
+        })
+
+    return (
+        <>
+            {isExpanded ? (
+                <form>
+                    <div className="border border-primary rounded-4 p-2">
+                        <h2>New Event:</h2>
+                        <div>
+                            <label htmlFor="time" className="form-label">Date:</label>
+                            <input type="date" className="form-control" id="time"
+                                name="time"
+                                onChange={handleChange}
+                                value={formValues.time}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="description">Event Information</label>
+                            <input className="mb-2 col-12" id="description"
+                                name="desc"
+                                onChange={handleChange}
+                                value={formValues.desc}
+                            />
+                        </div>
+                        <button className="btn btn-light p-1 border center" onClick={handleSubmit}>Submit</button>
+                    </div>
+                </form>     
+            ) : null}
+            <button className="btn btn-light p-1 border" onClick={handleButtonClick}>{ isExpanded ? "<" : ">"}</button>    
+        </>
+        
+    )
+}
