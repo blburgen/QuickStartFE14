@@ -36,18 +36,18 @@ export default function App() {
     setAppointments( appointments.filter(s=>s.id !== idToDelete))
   }
 
-  // const updateAppointment = (property:string, newValue:string, idToUpdate?: number) => {
-  //   if(idToUpdate === undefined){
-  //     return
-  //   }
+  const updateAppointment = (property:string, newValue:string, idToUpdate?: number) => {
+    if(idToUpdate === undefined){
+      return
+    }
 
-  //   setAppointments(currentAppointment => currentAppointment.map(appointment => (
-  //     appointment.id !== idToUpdate ? appointment: {
-  //       ...appointment,
-  //       [property]:newValue
-  //     }
-  //   )))
-  // }
+    setAppointments(currentAppointment => currentAppointment.map(appointment => (
+      appointment.id !== idToUpdate ? appointment: {
+        ...appointment,
+        [property]:newValue
+      }
+    )))
+  }
 
   const addAppointment = (time: string, desc: string) => {
     const newAppointment = {
@@ -63,19 +63,17 @@ export default function App() {
     <>
       <Navigation />
       <h1 className="text-center">Quick Start Front End Weeks 14-16 Assignement</h1>
-      <h1 className="text-center">Under Construction</h1>
+      <h1 className="text-center">Appointment App</h1>
       <div className="d-flex flex-column">
         <div className="d-flex flex-grow-1">
           <Sidebar 
-            // appointments = {appointments}
             addAppointment = {addAppointment}
-            // updateAppointment = {updateAppointment}
           />
           <div className="flex-grow-1">
-            <ItemList 
+            <ItemList
               appointments={sortedAppointments}
               deleteAppointment={deleteAppointment}
-              // updateAppointment={updateAppointment}
+              updateAppointment={updateAppointment}
             />
           </div>
         </div>
