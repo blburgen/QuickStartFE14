@@ -30,6 +30,8 @@ const TEST_APPOINTMENTS =[
 export default function App() {
   const [ appointments, setAppointments ] = useState<Appointment[]>(TEST_APPOINTMENTS)
 
+  let sortedAppointments = appointments.slice().sort((a, b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+
   const deleteAppointment = (idToDelete:number) => {
     setAppointments( appointments.filter(s=>s.id !== idToDelete))
   }
@@ -71,7 +73,7 @@ export default function App() {
           />
           <div className="flex-grow-1">
             <ItemList 
-              appointments={appointments}
+              appointments={sortedAppointments}
               deleteAppointment={deleteAppointment}
               updateAppointment={updateAppointment}
             />
