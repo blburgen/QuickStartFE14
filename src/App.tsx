@@ -36,18 +36,18 @@ export default function App() {
     setAppointments( appointments.filter(s=>s.id !== idToDelete))
   }
 
-  const updateAppointment = (property:string, newValue:string, idToUpdate?: number) => {
-    if(idToUpdate === undefined){
-      return
-    }
+  // const updateAppointment = (property:string, newValue:string, idToUpdate?: number) => {
+  //   if(idToUpdate === undefined){
+  //     return
+  //   }
 
-    setAppointments(currentAppointment => currentAppointment.map(appointment => (
-      appointment.id !== idToUpdate ? appointment: {
-        ...appointment,
-        [property]:newValue
-      }
-    )))
-  }
+  //   setAppointments(currentAppointment => currentAppointment.map(appointment => (
+  //     appointment.id !== idToUpdate ? appointment: {
+  //       ...appointment,
+  //       [property]:newValue
+  //     }
+  //   )))
+  // }
 
   const addAppointment = (time: string, desc: string) => {
     const newAppointment = {
@@ -75,7 +75,7 @@ export default function App() {
             <ItemList 
               appointments={sortedAppointments}
               deleteAppointment={deleteAppointment}
-              updateAppointment={updateAppointment}
+              // updateAppointment={updateAppointment}
             />
           </div>
         </div>
